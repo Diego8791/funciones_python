@@ -51,10 +51,10 @@ def ordenar(numeros):
 
 def contar(numeros, elemento):
     if (elemento in numeros) == False:
-        print('El elemento no se encuentra')
+        cant_rep = 0
     else:
         cant_rep = numeros.count(elemento)
-        return cant_rep 
+    return cant_rep 
 
 
 def buscar(numeros, index_elem):
@@ -241,5 +241,5 @@ if __name__ == '__main__':
     #ej1()
     #ej2()
     #ej3()
-    #ej4()
-    ej5()
+    ej4()
+    #ej5()
