@@ -48,7 +48,9 @@ def ordenar(numeros):
     else:
         print('Opcion no valida')
 
-
+# Inove: Sugerimos que cuando el elemento no está en
+# la lista aún así se retorne "0" para que el codigo
+# que llame a esta función pueda manejar ese caso
 def contar(numeros, elemento):
     if (elemento in numeros) == False:
         cant_rep = 0
