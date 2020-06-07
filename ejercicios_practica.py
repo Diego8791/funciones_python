@@ -16,6 +16,12 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 
+import my_tools
+import random
+import statistics
+import math
+
+
 def ej1():
     print('Comencemos a crear lo nuestro!')
 
@@ -45,24 +51,38 @@ def ej2():
     Utilice la función "lista_aleatoria" para generar
     5 tiros de dados (una lista de 5 con resultados posibles
     de un dado)
-
+    '''
+    numeros = my_tools.lista_aleatoria(1, 6, 5)
+    print('Lista de 5 elementos posibles\n',numeros)
+    
+    '''    
     1)
     Utilice la función "ordenar" para ordenar la lista
     de números generados.
     Imprimir en pantalla la lista ordenada
-
+    '''
+    numeros.sort(reverse=False)
+    print('Lista ordenada\n',numeros)
+    
+    '''
     2)
     Importe el modulo "random" a este programa/documento
     Luego llame al método "shuffle" del módulo "random"
     para volver a mezclar la lista de tiros de dados.
-
+    '''
+    random.shuffle(numeros)
+    print('Lista despues de aplicar el método shuffle\n',numeros)
+    
+    '''
     3)
     Utilice el método "sample" del módulo "random"
     para obtener al hazar 3 valores de la lista
     de números.
     Imprima en pantalla dicha lista de 3 valores.
     '''
-
+    
+    lista_nueva = random.sample(numeros, 3)
+    print('Lista de 3 numeros aplicando el metodo sample\n',lista_nueva)
 
 def ej3():
     print("Dominando la recursividad")
@@ -104,7 +124,7 @@ def ej4():
     para generar una lista de 20 elementos, en un rango del 0 al 100 inclusive
     A continuación se solicitará que calcule el desvío estandar
     del la lista de números generaods.
-
+    
     Para calcular el desvió estandar deberá aprovechar la función
     de "promedio", que en estadística al promedio se lo llama "media"
     Deberá calcular la sumatoria de la diferencia de todos los elementos
@@ -133,6 +153,23 @@ def ej4():
     '''
     # Mi implementación de desvió estandar a continuación:
 
+    numeros = my_tools.lista_aleatoria(0, 100, 20)
+    print(numeros)
+    
+    # calculo de la media (no encontre la funcion promedio)
+    # lo defini como suma de los valores dividido cantidad de valores
+    media = sum(numeros) / len(numeros)
+    print('la media aritmetica es',media)
+    
+    sumatoria = 0
+
+    for i in range(len(numeros)):
+        diferencia = numeros[i] - media
+        sumatoria += (abs(diferencia)**2) 
+    
+    des_standard = math.sqrt(sumatoria / (len(numeros)-1))
+    print('La desviacion standard es',round(des_standard, 2))
+
     '''
     Ahora que han terminado, importe el módulo "statistics" y realice
     los mismos calculos utilizando los metodos del módulo para verificar
@@ -140,7 +177,11 @@ def ej4():
     1 - Utilice el método mean() para contrastar nuestro método "promedio"
     2 - Utilice el método stdev() para contrastar nuestro función desvio_estandar
     '''
-
+    # calculo de la media 
+    print('media con modulo statistics', statistics.mean(numeros))  
+    # calculo de la desviacion standard
+    print('desviacion standard con modulo statistics',round(statistics.stdev(numeros), 2))
+    
 
 def ej5():
     print("Ahora sí! buena suerte :)")
@@ -164,7 +205,7 @@ def ej5():
     Si por ejemplo salió 4-4-2-1-4, debe quedarse con esos tres "4"
     Debe extrarlos de la lista, quedándole dos listas separadas
     dados_guardados = [4,4,4]
-    dados_para_tirar= [2,1]
+    dados_para_tirar = [2,1]
     Utilice el método "pop" para extraer elementos de una lista
     y el método "append" para agregar nuevos.
     Puede utilizar la función creada "buscar" para encontrar
@@ -172,11 +213,11 @@ def ej5():
 
     4) Debe volver a tira los dados, generar nuevos
     números aleatorios para aquellos dados reservados para
-    tirar (dados_para_tirar). Es decir, que si tengo 2 elementos
-    en mi lista de "dados_para_tirar", debo generar dos números
+    tirar (chances). Es decir, que si tengo 2 elementos
+    en mi lista de "chances", debo generar dos números
     aleatorios nuevos.
     Otra opción es generar una "lista_generica" nueva y reemplazar
-    los "dados_para_tirar".
+    los "chances".
 
     5) Luego de tirar nuevamente los datos, por ejemplo digamos
     que salieron los números: 4-1
@@ -186,10 +227,40 @@ def ej5():
     Si salió un "4" me lo quedo y lo sacó de la lista y lo guardo
     en "dados_guardados".
 
-    5) Debe repetir este proceso hasta que en su lista de "dados
+    6) Debe repetir este proceso hasta que en su lista de "dados
     guardados" tenga "generala", es decir, 5 números iguales.
 
     '''
+
+    numeros = my_tools.lista_aleatoria(1, 6, 5)
+    print(numeros)
+    paso = 1
+    chances = 5
+    
+    while len(numeros) != 0:
+        if paso == 1:
+            numero_repetido = max(numeros, key=numeros.count)
+            print(numero_repetido)
+            dados_guardados = []
+            dados_para_tirar = []
+            for i in range(len(numeros)):
+                if numeros[i] == numero_repetido:
+                    dados_guardados.append(numero_repetido)                  
+                    chances -= 1
+                else:
+                    dados_para_tirar.append(numeros[i])
+            print(dados_guardados)
+            print(dados_para_tirar)
+            paso += 1
+        else:
+            numeros = my_tools.lista_aleatoria(1, 6, chances)
+            for i in range(len(numeros)):
+                if numeros[i] == numero_repetido:
+                    dados_guardados.append(numero_repetido)
+                    chances -= 1
+    print(dados_guardados)
+    print('¡GENERALA!')
+
 
 
 if __name__ == '__main__':
@@ -198,4 +269,4 @@ if __name__ == '__main__':
     #ej2()
     #ej3()
     #ej4()
-    #ej5()
+    ej5()
