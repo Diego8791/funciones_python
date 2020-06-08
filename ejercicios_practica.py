@@ -177,10 +177,11 @@ def ej4():
     1 - Utilice el método mean() para contrastar nuestro método "promedio"
     2 - Utilice el método stdev() para contrastar nuestro función desvio_estandar
     '''
+    print('----------Calculo con modulo statistics------------')
     # calculo de la media 
-    print('media con modulo statistics', statistics.mean(numeros))  
+    print('Media:', statistics.mean(numeros))  
     # calculo de la desviacion standard
-    print('desviacion standard con modulo statistics',round(statistics.stdev(numeros), 2))
+    print('Desviacion Standard',round(statistics.stdev(numeros), 2))
     
 
 def ej5():
@@ -233,34 +234,28 @@ def ej5():
     '''
 
     numeros = my_tools.lista_aleatoria(1, 6, 5)
-    print(numeros)
-    paso = 1
-    chances = 5
-    
+    dados_guardados = []
+    dados_para_tirar = []
+    paso = 1                 # variable para ejercutar la seleccion del numero
+
     while len(numeros) != 0:
         if paso == 1:
             numero_repetido = max(numeros, key=numeros.count)
-            print(numero_repetido)
-            dados_guardados = []
-            dados_para_tirar = []
+            print('El numero seleccionado es',numero_repetido)
             for i in range(len(numeros)):
                 if numeros[i] == numero_repetido:
                     dados_guardados.append(numero_repetido)                  
-                    chances -= 1
                 else:
                     dados_para_tirar.append(numeros[i])
-            print(dados_guardados)
-            print(dados_para_tirar)
             paso += 1
         else:
-            numeros = my_tools.lista_aleatoria(1, 6, chances)
+            numeros = my_tools.lista_aleatoria(1, 6, len(dados_para_tirar))
             for i in range(len(numeros)):
-                if numeros[i] == numero_repetido:
+                if numeros[-i] == numero_repetido:
                     dados_guardados.append(numero_repetido)
-                    chances -= 1
+                    dados_para_tirar.pop(-i)
     print(dados_guardados)
-    print('¡GENERALA!')
-
+    print('¡FELICIDADES!.... ¡GENERALA!')
 
 
 if __name__ == '__main__':
@@ -268,5 +263,5 @@ if __name__ == '__main__':
     #ej1()
     #ej2()
     #ej3()
-    #ej4()
-    ej5()
+    ej4()
+    #ej5()
