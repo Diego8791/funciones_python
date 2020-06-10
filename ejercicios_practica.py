@@ -22,6 +22,27 @@ import statistics
 import math
 
 
+def factorial_numero(numero, factorial):
+    '''
+    Función para el cálculo del factorial de un número
+    previamente introducido por el usuario utilizando el 
+    concepto de recursividad.
+    '''
+        
+    if factorial == 0:
+        factorial = numero * (numero - 1)
+        numero -= 1 
+        factorial_numero(numero, factorial)
+        return numero, factorial
+    else:
+        if numero > 1:
+            factorial *= (numero - 1) 
+            numero -= 1
+            factorial_numero(numero, factorial)
+            return numero, factorial
+        else:
+            print('el factorial es', factorial)
+
 def ej1():
     print('Comencemos a crear lo nuestro!')
 
@@ -85,8 +106,7 @@ def ej2():
     print('Lista de 3 numeros aplicando el metodo sample\n',lista_nueva)
 
 def ej3():
-    print("Dominando la recursividad")
-
+    
     '''
     En este ejercicio se deberá plantear el calculo del
     factorial de un número utilizando recursividad
@@ -114,6 +134,11 @@ def ej3():
     Les dejamos este ejercicio para que lo piensen, lo pueden dejar para el final
     Cualquier duda nos escriben en el Campus
     '''
+    print("Dominando la recursividad")
+    numero = int(input('numero: '))
+    factorial = 0
+    factorial_numero(numero, factorial)
+    
 
 
 def ej4():
@@ -262,6 +287,6 @@ if __name__ == '__main__':
     print("Ejercicios de práctica")
     #ej1()
     #ej2()
-    #ej3()
-    ej4()
+    ej3()
+    #ej4()
     #ej5()
